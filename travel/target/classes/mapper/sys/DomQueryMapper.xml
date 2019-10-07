@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jt.sys.dao.DomQueryDao">
+	<!-- 查询账单列表 -->
+	<select id="findList" resultType="com.jt.sys.entity.DomInput">
+		SELECT
+		wuliuid,danhao,riqi,shouhuoren,
+		fahuoren,huowumingchen,jianshu,zhongliang,
+		danjia,zongjia,huowuzhuangtai,songhuo,
+		songhuofei,qitafeiyong,qitafeiyongbeizhu,
+		fukuanzhuangtai,jiesuanfangshi,fukuanren,
+		mudidi,zhongzhuan,beizhu
+		FROM
+		zhangdan
+		WHERE
+		riqi=#{riqi},shouhuoren=#{shouhuoren},fahuoren=#{fahuoren}
+		ORDER BY riqi DESC
+
+
+	</select>
+	
+	
+	<select id="findAll" resultType="com.jt.sys.entity.DomInput">
+		SELECT
+		wuliuid,danhao,riqi,shouhuoren,
+		fahuoren,huowumingchen,jianshu,zhongliang,
+		danjia,zongjia,huowuzhuangtai,songhuo,
+		songhuofei,qitafeiyong,qitafeiyongbeizhu,
+		fukuanzhuangtai,jiesuanfangshi,fukuanren,
+		mudidi,zhongzhuan,beizhu
+		FROM
+		zhangdan
+	</select>
+	
+</mapper>

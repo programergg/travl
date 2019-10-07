@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jt.sys.dao.SysUserDao">
+   <!-- 基于用户名获取用户信息 -->
+   <select id="findUserByUserName"
+           resultType="com.jt.sys.entity.SysUser">
+      select *
+      from sys_users  
+      where username=#{username}
+   </select>
+   
+   <!-- 用户更新操作(更新自身信息) -->
+   <update id="updateObject">
+       update sys_users
+          <set>
+             <if test="username!=null and username!=''">
+               username=#{username},
+             </if>
+             <if test="email!=null and email!=''">
+               wuliuid=#{wuliuid},
+             </if>
+             <if test="mobile!=null and mobile!=''">
+                mobile=#{mobile},
+             </if>
+             <if test="modifiedUser!=null and modifiedUser!=''">
+                modifiedUser=#{modifiedUser},
+             </if>
+             modifiedTime=now()
+          </set>
+          where id=#{id}      
+   </update>
+
+   <!-- 基于id查询用户以及部门信息 -->
+   <select id="findObjectById"
+           resultType="com.jt.sys.entity.SysUser">
+           select *
+           from sys_users
+           where id=#{id}
+   </select>
+
+   <!-- 保存用户自身信息 -->
+   <insert id="insertObject"
+           parameterType="com.jt.sys.entity.SysUser"
+           useGeneratedKeys="true"
+           keyProperty="id">
+      insert into sys_users
+      (username,password,wuliuid,mobile,salt,valid,
+      createdTime,modifiedTime,createdUser,modifiedUser)
+      values
+      (#{username},#{password},#{wuliuid},#{mobile},#{salt},#{valid},
+      now(),now(),#{createdUser},#{modifiedUser})
+   </insert>
+
+   <!-- 修改用户的状态信息(禁用和启用操作) -->
+   <update id="validById">
+      update sys_users
+      set valid=#{valid},modifiedUser=#{modifiedUser},
+          modifiedTime=now()
+      where id=#{id}
+   </update>
+
+   <!-- mybatis中使用sql标签定义共性sql元素
+        其它元素中用到了可以借助include直接引入 -->
+   <sql id="queryWhereId">
+        <where>
+            <if test="username!=null and username!=''">
+             username like concat("%",#{username},"%")
+            </if>
+        </where>  
+   </sql>
+   <!-- 按照名字统计记录总数 -->
+   <select id="getRowCount"
+           resultType="int">
+           select count(*)
+           from sys_users  
+           <include refid="queryWhereId"/>  
+   </select>
+   <!-- 分页查询用户以及用户对应的部门信息 -->
+   <select id="findPageObjects"
+           resultType="com.jt.sys.entity.SysUser">
+         select *
+         from sys_users 
+         order by createdTime desc
+         limit #{startIndex},#{pageSize}       
+   </select>
+   
+   <!-- 根据用户名查询物流id -->
+	<select id="doSelectWuliuId" resultType="java.lang.String">
+		select wuliuid from sys_users where username=#{username}
+	</select>
+</mapper>
+
+
+

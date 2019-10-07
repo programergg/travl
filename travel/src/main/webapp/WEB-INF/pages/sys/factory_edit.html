@@ -1,0 +1,123 @@
+<!-- Horizontal Form -->
+<div class="box box-info">
+	<div class="box-header with-border">
+		<h3 class="box-title">添加厂家</h3>
+	</div>
+	<!-- /.box-header -->
+	<!-- form start -->
+	<form class="form-horizontal">
+		<div class="box-body">
+			<div class="form-group">
+				<label for="wuliuid" class="col-sm-2 control-label">物流id</label>
+				<div class="col-sm-10">
+					<input type="text" class="form-control" name="wuliuid"
+						placeholder="物流id">
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="fahuoren" class="col-sm-2 control-label">发货人</label>
+				<div class="col-sm-10">
+					<input type="text" class="form-control" name="fahuoren"
+						placeholder="发货人">
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="fahuorendizhi" class="col-sm-2 control-label">发货人地址</label>
+				<div class="col-sm-10">
+					<input type="text" class="form-control" name="fahuorendizhi"
+						placeholder="发货人地址">
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="fahuorengongsiquanchen" class="col-sm-2 control-label">发货人公司全称</label>
+				<div class="col-sm-10">
+					<input type="text" class="form-control"
+						name="fahuorengongsiquanchen" placeholder="发货人公司全称">
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="fahuorenqiyedaima" class="col-sm-2 control-label">发货人企业代码</label>
+				<div class="col-sm-10">
+					<input type="text" class="form-control" name="fahuorenqiyedaima"
+						placeholder="发货人企业代码">
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="fahuorendianhua1" class="col-sm-2 control-label">发货人电话1</label>
+				<div class="col-sm-10">
+					<input type="text" name="fahuorendianhua1" placeholder="发货人电话1"
+						class="form-control">
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="fahuorendianhua2" class="col-sm-2 control-label">发货人电话2</label>
+				<div class="col-sm-10">
+					<input type="text" name="fahuorendianhua2" placeholder="发货人电话2"
+						class="form-control">
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="fahuorendianhua3" class="col-sm-2 control-label">发货人电话3</label>
+				<div class="col-sm-10">
+					<input type="text" name="fahuorendianhua3" placeholder="发货人电话3"
+						class="form-control">
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="fahuorendianhua4" class="col-sm-2 control-label">发货人电话4</label>
+				<div class="col-sm-10">
+					<input type="text" name="fahuorendianhua4" placeholder="发货人电话4"
+						class="form-control">
+				</div>
+			</div>
+		</div>
+		<!-- /.box-body -->
+		<div class="box-footer">
+			<button type="button" class="btn btn-default btn-cancel">返回</button>
+			<button type="button" class="btn btn-info pull-right btn-save">保存</button>
+		</div>
+		<!-- /.box-footer -->
+	</form>
+</div>
+<script type="text/javascript" src="bower_components/layer/layer.js">
+  </script>
+<script type="text/javascript">
+ $(document).ready(function(){
+	 
+	 $(".box-footer")
+	 .on("click",".btn-cancel",doCancel)
+	 .on("click",".btn-save",doSave);
+	 
+ });
+  
+  function doCancel(){
+	  var url="dom/doAddDomUI.do";
+	  $("#mainContentId").load(url,function(){
+		  $("#mainContentId").removeData();
+		  $("#parentId").removeData("parentId"); 
+	  });
+  }
+  
+	function doSave(){//insert
+	  //1.获取表单数据
+	  var data=$(".form-horizontal").serialize();
+	  //2.异步提交表单数据
+	  var url="dom/doSaveFactory.do";
+	  $.post(url,data,function(result){
+		  if(result.state==1){
+			  alert(result.message);
+			  doCancel();
+		  }else{
+			  alert(result.message);
+		  }
+	  })
+  }
+ </script>
+
+
+
+
+
+
+
+

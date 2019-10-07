@@ -1,0 +1,265 @@
+<!-- zhangdan Form -->
+ <div class="box box-info">
+      <div class="box-header with-border">
+        <h3 class="box-title">单据录入</h3>
+        <div class="box-tools">
+					<div class="input-group input-group-sm" style="width: 100px;">
+						<div class="input-group-btn">
+							<button type="button" class="btn btn-default btn-add-cus">添加客户</button>
+							<button type="button" class="btn btn-default btn-add-fac">添加厂家</button>
+						</div>
+					</div>
+		</div>
+      </div>
+      <!-- /.box-header -->
+      <!-- form start -->
+      <form class="form-horizontal">
+        <div class="box-body">
+        <div class="form-group">
+            <label for="wuliuid" class="col-sm-2 control-label"></label>
+            <div class="col-sm-10">
+              <input type="hidden" class="form-control" name="wuliuid"  id="wuliuid">
+            </div>
+          </div>
+         <div class="form-group">
+            <label for="danhao" class="col-sm-2 control-label">单号</label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control" name="danhao"  id="danhao" placeholder="名称">
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="riqi" class="col-sm-2 control-label">日期</label>
+            <div class="col-sm-10">
+              <input type="date"  class="form-control" name="riqi" id="riqi" placeholder="日期">
+            </div>
+          </div>
+          <div class="form-group">
+			<label for="shouhuoren" class="col-sm-2 control-label">收货人</label>
+			<div class="col-sm-10">
+				<input type="text" id="shouhuoren" name="shouhuoren"
+				       placeholder="收货人"
+					   class="form-control">
+			</div>
+		  </div>
+		  <div class="form-group">
+				<label for="fahuoren" class="col-sm-2 control-label">发货人</label>
+				<div class="col-sm-10">
+					<input type="text" name="fahuoren" id="fahuoren" placeholder="发货人"
+						class="form-control">
+				</div>
+		 </div>
+		  <div class="form-group">
+				<label for="huowumingchen" class="col-sm-2 control-label">货物名称</label>
+				<div class="col-sm-10">
+					<input type="text" name="huowumingchen" id="huowumingchen" placeholder="货物名称"
+						class="form-control">
+				</div>
+		 </div>
+		  <div class="form-group">
+				<label for="jianshu" class="col-sm-2 control-label">件数</label>
+				<div class="col-sm-10">
+					<input type="text" name="jianshu" id="jianshu" placeholder="件数"
+						class="form-control">
+				</div>
+		 </div>
+		 <div class="form-group">
+				<label for="zhongliang" class="col-sm-2 control-label">重量</label>
+				<div class="col-sm-10">
+					<input type="text" name="zhongliang" id="zhongliang" placeholder="重量"
+						class="form-control">
+				</div>
+		 </div>
+		 <div class="form-group">
+				<label for="danjia" class="col-sm-2 control-label">单价</label>
+				<div class="col-sm-10">
+					<input type="text" name="danjia" id="danjia" placeholder="单价"
+						class="form-control">
+				</div>
+		 </div>
+		 <div class="form-group">
+				<label for="zongjia" class="col-sm-2 control-label">总价</label>
+				<div class="col-sm-10">
+					<input type="text" name="zongjia" id="zongjia" placeholder="总价"
+						class="form-control">
+				</div>
+		 </div>
+		 <div class="form-group">
+				<label for="huowuzhuangtai" class="col-sm-2 control-label">货物状态</label>
+				<div class="col-sm-10">
+					<input type="text" name="huowuzhuangtai" id="huowuzhuangtai" placeholder="货物状态"
+						class="form-control">
+				</div>
+		 </div>
+		 <div class="form-group">
+				<label for="songhuo" class="col-sm-2 control-label">送货</label>
+				<div class="col-sm-10">
+					<input type="text" name="songhuo" id="songhuo" placeholder="送货"
+						class="form-control">
+				</div>
+		 </div>
+		 <div class="form-group">
+				<label for="songhuofei" class="col-sm-2 control-label">送货费</label>
+				<div class="col-sm-10">
+					<input type="text" name="songhuofei" id="songhuofei" placeholder="送货费"
+						class="form-control">
+				</div>
+		 </div>
+		 <div class="form-group">
+				<label for="qitafeiyong" class="col-sm-2 control-label">其他费用</label>
+				<div class="col-sm-10">
+					<input type="text" name="qitafeiyong" id="qitafeiyong" placeholder="其他费用"
+						class="form-control">
+				</div>
+		 </div>
+		 <div class="form-group">
+				<label for="qitafeiyongbeizhu" class="col-sm-2 control-label">其他费用备注</label>
+				<div class="col-sm-10">
+					<input type="text" name="qitafeiyongbeizhu" id="qitafeiyongbeizhu" placeholder="其他费用备注"
+						class="form-control">
+				</div>
+		 </div>
+		 <div class="form-group">
+				<label for="fukuanzhuangtai" class="col-sm-2 control-label">付款状态</label>
+				<div class="col-sm-10">
+					<input type="text" name="fukuanzhuangtai" id="fukuanzhuangtai" placeholder="付款状态"
+						class="form-control">
+				</div>
+		 </div>
+		 <div class="form-group">
+				<label for="jiesuanfangshi" class="col-sm-2 control-label">结算方式</label>
+				<div class="col-sm-10">
+					<input type="text" name="jiesuanfangshi" readonly="readonly" id="jiesuanfangshi" placeholder="结算方式"
+						class="form-control">
+				</div>
+		 </div>
+		 <div class="form-group">
+				<label for="fukuanren" class="col-sm-2 control-label">付款人</label>
+				<div class="col-sm-10">
+					<input type="text" name="fukuanren" readonly="readonly" id="fukuanren" placeholder="付款人"
+						class="form-control">
+				</div>
+		 </div>
+		 <div class="form-group">
+				<label for="mudidi" class="col-sm-2 control-label">目的地</label>
+				<div class="col-sm-10">
+					<input type="text" name="mudidi" readonly="readonly" id="mudidi" placeholder="目的地"
+						class="form-control">
+				</div>
+		 </div>
+		 <div class="form-group">
+				<label for="zhongzhuan" class="col-sm-2 control-label">中转</label>
+				<div class="col-sm-10">
+					<input type="text" name="zhongzhuan" readonly="readonly" id="zhongzhuan" placeholder="中转"
+						class="form-control">
+				</div>
+		 </div>
+		 <div class="form-group">
+				<label for="beizhu" class="col-sm-2 control-label">备注</label>
+				<div class="col-sm-10">
+					<input type="text" name="beizhu" id="beizhu" placeholder="备注"
+						class="form-control">
+				</div>
+		 </div>
+        </div>
+        <!-- /.box-body -->
+        <div class="box-footer">
+          <!-- <button type="button" class="btn btn-default btn-cancel">Cancel</button> -->
+          <button type="button" id="add" class="btn btn-info pull-right btn-save">保存</button>
+        </div>
+        <!-- /.box-footer -->
+      </form>
+  </div>
+  <script type="text/javascript" src="bower_components/ztree/jquery.ztree.all.min.js"></script>
+  <script type="text/javascript" src="bower_components/layer/layer.js">
+  </script>
+ <script type="text/javascript">
+$(document).ready(function(){ 
+	 $(".box-footer")
+	 .on("click",".btn-save",doSave);
+	 $(".form-group")
+	 .on("blur","#shouhuoren",doFindRecedMessage)
+	 .on("blur","#fahuoren",doFindSendMessage);
+	 $(".input-group-btn")
+	 .on("click",".btn-add-cus",doLoadCusEditUI)
+	 .on("click",".btn-add-fac",doLoadFacEditUI);
+});
+
+
+/* 添加客户  */
+function doLoadCusEditUI(){
+	var title="添加客户";
+	var url="dom/doCustomEditUI.do";
+	$("#mainContentId").load(url,function(){
+		$(".box-title").html(title);
+	})
+};
+/* 添加厂家  */
+function doLoadFacEditUI(){
+	var title="添加厂家";
+	var url="dom/doFactoryEditUI.do";
+	$("#mainContentId").load(url,function(){
+		$(".box-title").html(title);
+	})
+};
+/* 通过物流id 发货人查询厂家信息 */
+function doFindSendMessage(){
+	 var url = "dom/doFindFactory.do";
+	 var data = {fahuoren:$("#fahuoren").val()};
+	 $.post(url,data,function(result){
+		 if(result.state==1){
+			 //alert(result.message);
+		 }else{
+			 alert(result.message);
+			 doLoadFacEditUI();
+		 }
+	 });
+}
+
+/* 通过物流id和收货人查找相关信息  */
+ function doFindRecedMessage(){
+	 var url = "dom/doFindClient.do";
+	 var data = {shouhuoren:$("#shouhuoren").val()};
+	 $.post(url,data,function(result){
+		 if(result.state==1){
+			 //alert(result.message);
+			doSetCusMessage(result.data);
+		 }else{
+			 alert(result.message);
+			 doLoadCusEditUI();
+			
+		 }
+		
+	 });
+	 
+ }
+ function doSetCusMessage(data){
+	 $("#fukuanren").val(data.fukuanren);
+	 $("#jiesuanfangshi").val(data.jiesuanfangshi);
+	 $("#mudidi").val(data.mudidi);
+ }
+ 
+ function doSave(){//insert or update
+	  //1.获取表单数据
+	  //var data=doGetEditFormData();
+ 	  var data = $(".form-horizontal").serialize();
+ 	  alert(data);
+	  //2.异步提交表单数据
+	  var url="dom/doAddDom.do";
+	  $.post(url,data,function(result){
+		  if(result.state==1){
+			  alert(result.message);
+		  }else{
+			  alert(result.message);
+		  }
+	  })
+ }
+ </script>
+    
+    
+    
+    
+    
+    
+    
+    
+    

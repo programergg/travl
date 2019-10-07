@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jt.sys.dao.PrintDao">
+	
+	<!-- 查询客户端信息 -->
+	<select id="doFindRoutes" resultType="com.jt.sys.entity.Logistics">
+		SELECT  w.id,w.wuliuid,w.route 
+	FROM zhangdan z LEFT JOIN wuliu w 
+	ON z.wuliuid=w.wuliuid WHERE z.wuliuid=#{wuliuid} and z.riqi=curdate();
+	</select>
+	
+	<select id="doFindDrivers" resultType="com.jt.sys.entity.Driver">
+		SELECT  *  FROM driver WHERE route=#{route};
+	</select>
+	
+	
+</mapper>

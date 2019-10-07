@@ -1,0 +1,218 @@
+<link rel="stylesheet" type="text/css" href="css/print.css" media="print"/>
+<link rel="stylesheet" type="text/css" href="css/screen.css" media="screen"/>
+<div class="row">
+	<div class="col-xs-12">
+		<div class="box">
+			<div class="box-header">
+				<h3 class="box-title">物流路线</h3>
+				<h1></h1>
+				<div class="box-tools">
+					<div class="input-group input-group-sm" style="width:100px;">
+						<input type="date" name="startdateId" id="startdateId"
+							class="form-control pull-right" placeholder="开始日期">
+						<input type="date" name="enddateId" id="enddateId"
+							class="form-control pull-right" placeholder="结束日期">
+						<div class="input-group-btn">
+							<button type="button" class="btn btn-default btn-add-cus">查询</button>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- /.box-header -->
+			<!-- /.box-header -->
+			<div class="box-body table-responsive no-padding">
+				<table class="table table-hover">
+					<thead>
+					<tr></tr>
+					</thead>
+					<tbody id="tbodyId"></tbody>
+				</table>
+			</div>
+			<div id="pageId" class="box-footer clearfix">
+			</div>
+			<!-- /.box-body -->
+			<!-- zTree 对应的div -->
+      <div class="layui-layer layui-layer-page layui-layer-molv layer-anim" id="driverLayer" type="page" times="2" showtime="0" contype="object"
+		style="z-index:59891016; width: 300px; height: 450px; top: 100px; left: 500px; display:none">
+		<div class="layui-layer-title" style="cursor: move;">选择驾驶员</div>
+		<div class="layui-layer-content" style="height: 358px;">
+			<div style="padding: 10px;" class="layui-layer-wrap">
+				<ul id="driver" class="driverClass"></ul>    <!-- 动态加载树 -->
+			</div>
+		</div>
+		<span class="layui-layer-setwin"> <a class="layui-layer-ico layui-layer-close layui-layer-close1 btn-cancel" ></a></span>
+		<div class="layui-layer-btn layui-layer-btn-">
+			<a class="layui-layer-btn0 btn-confirm">确定</a>
+			<a class="layui-layer-btn1 btn-cancel">取消</a>
+	     </div>
+      </div>
+		</div>
+		<!-- /.box -->
+	</div>
+</div>
+<script type="text/javascript">
+
+   $(document).ready(function(){
+		   doGetRoutes(); 
+		/* 注册点击路线事件 */
+	   $("tbody").on("click",".btn-route",doFindDriver);
+	   $("#driverLayer")
+	     .on("click",".btn-cancel",doHideTree)
+	     .on("click",".btn-confirm",doSetSelect);
+   });
+   /* 加载驾驶员 */
+   function doFindDriver(){
+	 //显示div
+		  $("#driverLayer").css("display","block");
+		  var url = "print/doFindDriver.do";
+		  var params={route: $(this).val()};
+		  //异步加载数据,并初始化数据
+		  $.getJSON(url,params,function(result){
+			  if(result.state==1){
+				  doSetulBodyRows(result.data);
+			  }else{
+				  alert(result.message);
+			  }
+		  })
+   }
+   function doSetulBodyRows(data){
+	   //获取ul标签
+	   var ul = $("#driver");
+	   ul.empty();
+	 //2.迭代data内容将数据追加到tbody中
+		for(var i in data){
+			  var li=$("<li></li>");
+			  li.data("rowData",data[i]);
+			  var checkbox=doCreateCheckBox(data[i]);
+			  li.append(checkbox);
+			  ul.append(li);
+		  }
+   }
+   function doCreateCheckBox(data){
+	   var checkbox="<input type='checkbox' name='vehicle' value="+data.name+" />"+data.name; 
+	      return checkbox;
+   }
+   /* 选中按钮 */
+   function doSetSelect(){
+		  //1.获取选中的节点对象
+		  /* var nodes=zTree.getSelectedNodes();
+		  if(nodes.length==0){
+			  alert("请先选中");
+			  return;
+		  }
+		  var node=nodes[0];
+		  console.log(node);
+		  //2.将对象中内容,填充到表单
+		  $("#parentId").data("parentId",node.id);
+		  $("#parentId").val(node.name); */
+		  //3.隐藏树对象
+		  doHideTree();
+	  }
+
+	function doHideTree(){
+		 $("#driverLayer").css("display","none");
+	}
+   /* 加载需要打印的界面 */
+  function doPrintRoute(){
+	  var url = "print/doPrintRoute.do";
+	  var Sdate = $('#startdateId').val()? $('#startdateId').val():setDefaultDate();
+	  var Edate = $('#enddateId').val()? $('#enddateId').val():setDefaultDate();
+	  alert(Sdate+":"+Edate);
+	 var route =  $(this).val();
+	 alert(route);
+	  var params = {
+			  route: route,
+			  startdateId: Sdate,
+			  enddateId: Edate
+	  };
+	  var title = '打印页面';
+		  //3.ajax request
+		   $.getJSON(url,params,function(result){//JsonResult
+			   if(result.state==1){
+				  $("#mainContentId").data("rowData",result.data); 
+		          doLoadPage(title);
+			   }else{
+				  alert(result.message);
+			   }
+	  });
+  }
+   /* 配置时间 */
+  function setDefaultDate() {
+		var mydate = new Date();
+		var month = mydate.getMonth() + 1;
+		var day = mydate.getDate();
+		month = (month.toString().length == 1) ? ("0" + month) : month;
+		day = (day.toString().length == 1) ? ("0" + day) : day;
+
+		var result = mydate.getFullYear() + '-' + month + '-' + day; //当前日期
+
+		return result;
+  }
+   /* 加载页面 */
+  function doLoadPage(title){
+	   var url="print/doPrintEditUI.do"
+	   $("#mainContentId").load(url,function(){
+		   $(".box-title").html(title);
+	   }) 
+  }
+   /* 获取路线 */
+  function doGetRoutes(){
+	  var url = "print/doFindRoutes.do";
+	  var params = {};
+	  $.post(url,params,function(result){
+		   doHandleRouteResult(result);
+		   
+	   });
+	  doGetDriver();
+  }
+   /* 查找驾驶员  */
+ function doGetDriver(){
+	 var url = "print/doFindRoutes.do";
+ }
+  function doHandleRouteResult(result){
+	   if(result.state==1){
+		  doSetTableBodyRows(result.data);
+		}else{
+		  alert(result.message);
+	   }
+  }
+//通过服务端返回的数据初始化页面
+  function doSetTableBodyRows(data){
+	  //1.获取tbody对象，并清空内容
+	  var tBody=$("#tbodyId");
+	  tBody.empty();
+	  //2.迭代data内容将数据追加到tbody中
+	  for(var i in data){
+		  var tr=$("<tr></tr>");
+		  tr.data("rowData",data[i]);
+		  var tds=doCreateTds(data[i]);
+		  tr.append(tds);
+		  tBody.append(tr);
+	  }
+  }
+  function doCreateTds(row){
+	   console.log(row);
+	   var tds="<td><button type='button' value="+row.route+" class='btn btn-default btn-route'>"+row.route+"</button></td>"; 
+      return tds;
+  }
+   /* 打印事件 */
+   function printReport(){
+
+		var newstr = document.getElementById("tbodyId").innerHTML;
+
+		var oldstr = document.body.innerHTML;
+
+		document.body.innerHTML = newstr;
+
+		window.print();
+
+		document.body.innerHTML = oldstr;
+
+		return false;
+
+		}
+</script>
+
+
+
+
